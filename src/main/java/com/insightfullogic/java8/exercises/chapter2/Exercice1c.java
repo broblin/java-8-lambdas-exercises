@@ -17,6 +17,6 @@ public class Exercice1c<T,R> {
         Function<Long,Boolean> compare =  x -> x==1;
 
         System.out.println(exemple.calculate(2L,add));
-        System.out.println(exemple.calculate(2L,compare));
+        System.out.println(exemple2.calculate(2L,compare));
     }
 }
