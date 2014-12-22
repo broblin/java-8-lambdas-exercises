@@ -10,12 +10,19 @@ public class StringExercises {
 
     // Question 7
     public static int countLowercaseLetters(String string) {
-        return Exercises.replaceThisWithSolution();
+        return (int) string.chars().filter(intValue -> Character.isLowerCase(intValue)).count();
     }
 
     // Question 8
     public static Optional<String> mostLowercaseString(List<String> strings) {
         return Exercises.replaceThisWithSolution();
+    }
+
+    public static void main(String[] args){
+        String string = "WithLowerChar";
+        System.out.println(StringExercises.countLowercaseLetters(string));
+
+
     }
 
 }
