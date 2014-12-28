@@ -1,7 +1,6 @@
 package com.insightfullogic.java8.exercises.chapter4;
 
 import com.insightfullogic.java8.examples.chapter1.Artist;
-import com.insightfullogic.java8.exercises.Exercises;
 
 import java.util.stream.Stream;
 
@@ -15,7 +14,13 @@ public interface PerformanceFixed {
     public Stream<Artist> getMusicians();
 
     public default Stream<Artist> getAllMusicians() {
-        return Exercises.replaceThisWithSolution();
+        //essai 1 : en fait le "add" recherché était la méthode concat de Stream
+        /*return getMusicians().flatMap(band -> {
+            List<Artist> result = new ArrayList<>();
+            result.add(band);
+            result.addAll(band.getMembers().collect(Collectors.toList()));
+            return result.stream();
+        });*/
+        return getMusicians().flatMap(band -> concat(Stream.of(band),band.getMembers()));
     }
-
 }

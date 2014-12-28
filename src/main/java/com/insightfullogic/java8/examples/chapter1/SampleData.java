@@ -25,6 +25,10 @@ public class SampleData {
 
     public static final Album manyTrackAlbum = new Album("sample Short Album", asList(new Track("short track", 30), new Track("short track 2", 30), new Track("short track 3", 30), new Track("short track 4", 30), new Track("short track 5", 30)), asList(johnColtrane));
 
+    public static final Album compilationAlbum = new Album("sample Short Album", asList(new Track("short track", 30), new Track("short track 2", 30), new Track("short track 3", 30), new Track("short track 4", 30), new Track("short track 5", 30)), asList(johnColtrane,theBeatles));
+
+    public static final Album yellowSubmarine = new Album("Yellow Submarine", asList(new Track("Yellow Submarine", 467), new Track("Only a Northern Song", 442)),asList(theBeatles));
+
     public static Stream<Album> albums = Stream.of(aLoveSupreme);
 
     public static Stream<Artist> threeArtists() {
