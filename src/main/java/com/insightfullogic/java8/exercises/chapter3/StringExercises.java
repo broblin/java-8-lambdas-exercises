@@ -14,7 +14,7 @@ public class StringExercises {
 
     // Question 8
     public static Optional<String> mostLowercaseString(List<String> strings) {
-        //essai 2 : le problème 2 boucles for et 2 appels à countLowercaseLetters pour chaque string
+        //essai 2 : le problème, 2 boucles for et 2 appels à countLowercaseLetters pour chaque string
         //OptionalInt previousMaxResult = strings.stream().mapToInt(string -> countLowercaseLetters(string)).max();
         //return strings.stream().filter(string -> countLowercaseLetters(string) == previousMaxResult.getAsInt()).findFirst();
 
