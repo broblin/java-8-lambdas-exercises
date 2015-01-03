@@ -73,6 +73,7 @@ public class GroupingBy<T, K> implements Collector<T, Map<K, List<T>>, Map<K, Li
     //paramètres en vue d'optimisation de l'algorithme
     @Override
     public Set<Characteristics> characteristics() {
+        //faire éventuellement une variable statique ou d'instance pour optimiser
         Set<Characteristics> characteristicses = new HashSet<>();
         characteristicses.add(Characteristics.IDENTITY_FINISH);
         return characteristicses;
