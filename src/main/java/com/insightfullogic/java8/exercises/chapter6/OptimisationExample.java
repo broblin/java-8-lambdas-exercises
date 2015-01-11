@@ -1,6 +1,5 @@
 package com.insightfullogic.java8.exercises.chapter6;
 
-import com.insightfullogic.java8.exercises.Exercises;
 import org.openjdk.jmh.Main;
 import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.runner.RunnerException;
@@ -32,13 +31,16 @@ public class OptimisationExample {
     }
 
     private List<Integer> linkedListOfNumbers;
+    private List<Integer> arrayListOfNumbers;
 
     @Setup
     public void init() {
         linkedListOfNumbers = new LinkedList<>();
         addNumbers(linkedListOfNumbers);
 
-        // TODO: put any additional setup code here
+        // l'arrayList gère mieux la parallélisation qu'un linkedList
+        arrayListOfNumbers= new ArrayList<>();
+        addNumbers(arrayListOfNumbers);
     }
 
     private void addNumbers(List<Integer> container) {
@@ -57,7 +59,10 @@ public class OptimisationExample {
 
     @GenerateMicroBenchmark
     public int fastSumOfSquares() {
-        return Exercises.replaceThisWithSolution();
+        //mapToItn utilise la primitive int et non l'enveloppe correspondante qui prend plus de temps
+        return arrayListOfNumbers.parallelStream()
+                .mapToInt(x -> x * x)
+                .sum();
     }
 
 }
