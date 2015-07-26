@@ -1,7 +1,47 @@
 package com.revision.functionalExercices;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 /**
  * Created by benoit on 26/07/15.
  */
 public class FunctionalTestsLauncher {
+    public static void main(String[] args){
+        //forEach
+        ArrayList<Long> aList = new ArrayList<>();
+        aList.add(2L);
+        aList.add(3L);
+        aList.add(5L);
+        aList.forEach(number -> System.out.println(String.format("forEach : %d",number)));
+
+        //filter et count
+        List<Long> filteredList = aList.stream().filter(number -> number > 2L).collect(Collectors.toList());
+        long count = aList.stream().filter(number -> number > 2L).count(); //le stream ne peut être utilisé qu'une fois sinon IllegalStateException: stream has already been operated upon or closed
+        filteredList.forEach(number -> System.out.println(String.format("filter : %d",number)));
+        System.out.println(String.format("count : %d", count));
+
+        //groupBy et countBy
+        List<Livre> livres = new ArrayList<>();
+        Livre livre1 = new Livre();
+        Livre livre2 = new Livre();
+        Livre livre3 = new Livre();
+        livre1.setAuteur("Dantec");
+        livre2.setAuteur("Dantec");
+        livre3.setAuteur("Thilliez");
+        livre1.setCout(30);
+        livre2.setCout(40);
+        livre3.setCout(50);
+        livres.add(livre1);
+        livres.add(livre2);
+        livres.add(livre3);
+
+        System.out.println(String.format("countingBy : %s", livres.stream().collect(Collectors.groupingBy(Livre::getAuteur, Collectors.counting()))));
+        System.out.println(String.format("groupBy : %s", livres.stream().collect(Collectors.groupingBy(Livre::getAuteur))));
+        System.out.println(String.format("summingBy : %s", livres.stream().collect(Collectors.summingInt(Livre::getCout))));
+        System.out.println(String.format("summingBy : %s", livres.stream().map(Livre::getAuteur).collect(Collectors.toList())));
+    }
+
 }
