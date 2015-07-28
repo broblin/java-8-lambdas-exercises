@@ -1,7 +1,9 @@
 package com.revision.functionalExercices;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -42,6 +44,31 @@ public class FunctionalTestsLauncher {
         System.out.println(String.format("groupBy : %s", livres.stream().collect(Collectors.groupingBy(Livre::getAuteur))));
         System.out.println(String.format("summingBy : %s", livres.stream().collect(Collectors.summingInt(Livre::getCout))));
         System.out.println(String.format("summingBy : %s", livres.stream().map(Livre::getAuteur).collect(Collectors.toList())));
+
+        //anyMatch et everyMatch
+        System.out.println(String.format("anyMatch : %b",livres.stream().anyMatch(livre -> livre.getCout() == 30)));
+        //System.out.println(String.format("anyMatch : %d",livres.stream().everyMatch(livre -> livre.getCout() == 30)));
+
+        //reduce
+        System.out.println(String.format("reduce : %s", livres.stream().reduce(new Livre(), (result, livre) -> {
+            if (result.getAuteur() == null) {
+                result.setAuteur(livre.getAuteur());
+            } else if (!result.getAuteur().contains(livre.getAuteur())) {
+                result.setAuteur(result.getAuteur() + " " + livre.getAuteur());
+            }
+            return result;
+        }).getAuteur()));
+        System.out.println(String.format("reduce apres map : %s", livres.stream().map(livre -> livre.getAuteur()).reduce("", (result, auteur) -> {
+            if(!result.isEmpty()){
+                result += " ";
+            }
+            if (!result.contains(auteur)) {
+                result += auteur;
+            }
+            return result;
+        })));
+        //TODO Map resultMap = livres.stream().reduce(new HashMap<String,String>(),(map,livre) -> map.put())
+        System.out.println(String.format("reduce avec acc 2 : %d", livres.stream().reduce(0,(sum,livre)->sum+=livre.getCout(),(sum1,sum2)->sum1+sum2)));
     }
 
 }
