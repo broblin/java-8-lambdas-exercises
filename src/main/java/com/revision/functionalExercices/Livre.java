@@ -6,6 +6,7 @@ package com.revision.functionalExercices;
 public class Livre {
 
     String auteur;
+    String titre;
     int cout;
 
     public String getAuteur() {
@@ -22,5 +23,13 @@ public class Livre {
 
     public void setCout(int cout) {
         this.cout = cout;
+    }
+
+    public String getTitre() {
+        return titre;
+    }
+
+    public void setTitre(String titre) {
+        this.titre = titre;
     }
 }

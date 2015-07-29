@@ -31,8 +31,11 @@ public class FunctionalTestsLauncher {
         Livre livre2 = new Livre();
         Livre livre3 = new Livre();
         livre1.setAuteur("Dantec");
+        livre1.setTitre("Babylon babies");
         livre2.setAuteur("Dantec");
+        livre2.setTitre("Vortex");
         livre3.setAuteur("Thilliez");
+        livre3.setTitre("La chambre des mort");
         livre1.setCout(30);
         livre2.setCout(40);
         livre3.setCout(50);
@@ -67,7 +70,22 @@ public class FunctionalTestsLauncher {
             }
             return result;
         })));
-        //TODO Map resultMap = livres.stream().reduce(new HashMap<String,String>(),(map,livre) -> map.put())
+        Map acc2 = livres.stream().reduce(new HashMap<String,String>(),
+                (map,livre) -> {
+                    if(!map.containsKey(livre.getAuteur())){
+                        map.put(livre.getAuteur(),livre.getTitre());
+                    }else{
+                        String previous = map.get(livre.getAuteur());
+                         previous += " " + livre.getTitre();
+                        map.put(livre.getAuteur(),previous);
+                    }
+                    return map;
+                },
+                (map1,map2) -> {
+            map1.putAll(map2);
+            return map1;
+        });
+        System.out.println(String.format("reduce avec acc 1 : %s", acc2));
         System.out.println(String.format("reduce avec acc 2 : %d", livres.stream().reduce(0,(sum,livre)->sum+=livre.getCout(),(sum1,sum2)->sum1+sum2)));
     }
 
